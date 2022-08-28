@@ -114,7 +114,7 @@ public class InstanceController {
 
     /**
      * Register new instance.
-     *
+     *服务注册接口
      * @param request http request
      * @return 'ok' if success
      * @throws Exception any error during register
@@ -123,12 +123,13 @@ public class InstanceController {
     @PostMapping
     @Secured(parser = NamingResourceParser.class, action = ActionTypes.WRITE)
     public String register(HttpServletRequest request) throws Exception {
-
+        //获取命名空间，默认为public
         final String namespaceId = WebUtils
                 .optional(request, CommonParams.NAMESPACE_ID, Constants.DEFAULT_NAMESPACE_ID);
+        //获取服务名称
         final String serviceName = WebUtils.required(request, CommonParams.SERVICE_NAME);
         NamingUtils.checkServiceNameFormat(serviceName);
-
+        //创建并初始化服务实例对象
         final Instance instance = parseInstance(request);
 
         serviceManager.registerInstance(namespaceId, serviceName, instance);
