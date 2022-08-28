@@ -75,7 +75,7 @@ import static com.alibaba.nacos.naming.misc.UtilsAndCommons.UPDATE_INSTANCE_META
 
 /**
  * Instance operation controller.
- *Rest风格接口（POST/PUT DELETE）
+ *REST风格接口（PUT DELETE POST）
  * @author nkorange
  */
 @RestController
