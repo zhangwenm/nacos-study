@@ -76,6 +76,8 @@ public class ClientBeatCheckTask implements Runnable {
     @Override
     public void run() {
         try {
+            //对service进行hash取模，保证只在一台服务进行健康检查，
+            // 这台服务会和其他服务进行同步
             if (!getDistroMapper().responsible(service.getName())) {
                 return;
             }
