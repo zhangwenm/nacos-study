@@ -129,9 +129,9 @@ public class InstanceController {
         //获取服务名称
         final String serviceName = WebUtils.required(request, CommonParams.SERVICE_NAME);
         NamingUtils.checkServiceNameFormat(serviceName);
-        //创建并初始化服务实例对象
+        //创建并初始化服务实例对象设置属性（ip，端口等）
         final Instance instance = parseInstance(request);
-
+        //服务注册
         serviceManager.registerInstance(namespaceId, serviceName, instance);
         return "ok";
     }
@@ -570,8 +570,9 @@ public class InstanceController {
     }
 
     private Instance parseInstance(HttpServletRequest request) throws Exception {
-
+        //解析请求serviceName属性
         String serviceName = WebUtils.required(request, CommonParams.SERVICE_NAME);
+        //解析请求app属性
         String app = WebUtils.optional(request, "app", "DEFAULT");
         Instance instance = getIpAddress(request);
         instance.setApp(app);
